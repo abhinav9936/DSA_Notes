@@ -1,3 +1,4 @@
+Single Source Algorithm
 It solves the Dijkstra limitation of negative edges and also it helps in checking negative cycles.
 Main intution behind this algorithm - 
 
