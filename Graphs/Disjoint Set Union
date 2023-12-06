@@ -1,3 +1,7 @@
+Points
+1) Time Complexity is 4 * alpha
+Read about alpha
+
 #include <bits/stdc++.h>
 #include <iostream>
 
