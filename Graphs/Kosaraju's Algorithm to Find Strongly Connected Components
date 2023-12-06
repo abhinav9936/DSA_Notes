@@ -1,0 +1,9 @@
+Strongly Connected Components are valid only for directed graphs
+
+Algorithm - https://www.youtube.com/watch?v=R6uoSjZ2imo&list=PLgUwDviBIf0rGEWe64KWas0Nryn7SCRWw&index=28
+1) Sort all the edges according to finishing time
+2) Reverse the graph
+3) Do a dfs
+
+
+Detailed algorithm - https://practice.geeksforgeeks.org/problems/strongly-connected-components-kosarajus-algo/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=strongly-connected-components-kosarajus-algo
