@@ -1,0 +1,42 @@
+MST - Minimum Spanning Tree
+
+DS Required
+1) Priority Queue
+2) Visited Array
+
+class Solution
+{
+	public:
+	//Function to find sum of weights of edges of the Minimum Spanning Tree.
+    int spanningTree(int V, vector<vector<int>> adj[])
+    {
+        vector<int> vis(V, 0);
+        int s = 0;
+        // code here
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+        pq.push({0, 0});
+        
+        while(!pq.empty())
+        {
+            auto it = pq.top();
+            pq.pop();
+            int wt = it.first;
+            int node = it.second;
+            
+            if(vis[node] == 1) continue;
+            
+            //Here we pick the min edge and add to the MST
+            vis[node] = 1;
+            s += wt;
+            
+            for(auto neigh : adj[node])
+            {
+                int nn = neigh[0];
+                int edgWt = neigh[1];
+                if(vis[nn] == 0)
+                    pq.push({edgWt, nn});
+            }
+        }
+        return s;
+    }
+};
