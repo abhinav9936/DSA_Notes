@@ -1,6 +1,6 @@
 tin[] - time of insertion 
 low[] - lowest time insertion of all adjacent nodes apart from parent
-
+A bridge is an edge which on removal splits the graph into multiple components
 https://leetcode.com/problems/critical-connections-in-a-network/submissions/1113820674/
 
 class Solution {
