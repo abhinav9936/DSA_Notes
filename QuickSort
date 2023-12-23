@@ -1,0 +1,48 @@
+Step 1 - Pick a pivot and place it in it's correct place in the sorted array.
+
+Pivot can be any element of your choice
+1) 1st element
+2) last element
+3) median of the array
+4) random element of the array
+
+
+Step 2 - Smaller on the left and larger on the right
+
+#include <bits/stdc++.h> 
+int partition(int low, int high, vector<int>& arr)
+{
+    int i = low;
+    int j = high;
+    int pivot = low;
+    while(i<j)
+    {
+        while(arr[i]<=arr[pivot] && i<=high-1)
+            i++;
+        
+        while(arr[j] > arr[pivot] && j >= low + 1)
+            j--;
+        
+        if(i<j)
+            swap(arr[i], arr[j]);
+    }
+    swap(arr[j], arr[pivot]);
+    return j;
+}
+void qSort(int low, int high, vector<int>& arr)
+{
+    if(low<high)
+    {
+        int partitionIndex = partition(low, high, arr);
+        qSort(low, partitionIndex-1, arr);
+        qSort(partitionIndex+1, high, arr);
+    }
+}
+vector<int> quickSort(vector<int> arr)
+{
+    // Write your code here.
+    qSort(0, arr.size()-1, arr);
+    return arr;
+}
+
+
