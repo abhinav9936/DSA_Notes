@@ -1,0 +1,42 @@
+class Solution {
+private:
+int partition(int low, int high, vector<int>& arr)
+{
+    int i = low;
+    int j = high;
+    int pivot = low;
+    while(i<j)
+    {
+        while(arr[i]<=arr[pivot] && i<=high-1)
+            i++;
+        
+        while(arr[j] > arr[pivot] && j >= low + 1)
+            j--;
+        
+        if(i<j)
+            swap(arr[i], arr[j]);
+    }
+    swap(arr[j], arr[pivot]);
+    return j;
+}
+void qSort(int low, int high, vector<int>& arr, int k)
+{
+    if(low<high)
+    {
+        int partitionIndex = partition(low, high, arr);
+        if(partitionIndex == k)
+            return;
+        if(k>= low && k<= partitionIndex-1)
+            qSort(low, partitionIndex-1, arr, k);
+        else
+            qSort(partitionIndex+1, high, arr, k);
+    }
+}
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        int n = nums.size();
+        k = nums.size() - k;
+        qSort(0, n-1, nums, k);
+        return nums[k];
+    }
+};
