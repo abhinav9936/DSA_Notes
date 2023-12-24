@@ -1,0 +1,72 @@
+#include <iostream>
+#include <vector>
+
+// Node structure for linked list
+struct Node {
+    int value;
+    Node* next;
+    
+    Node(int val) {
+      value = val; next = nullptr;
+    }
+};
+
+// Basic hash function
+size_t hashFunction(int key, size_t tableSize) {
+    return key % tableSize;
+}
+
+// Unordered set class
+class MyHashSet {
+private:
+    std::vector<Node*> table;
+    size_t size;
+
+public:
+    MyHashSet(size_t initialSize){
+        size = initialSize;
+        table.resize(size, nullptr);
+    }
+
+    // Insert a value into the set
+    void insert(int key) {
+        size_t index = hashFunction(key, size);
+        Node* newNode = new Node(key);
+        newNode->next = table[index];
+        table[index] = newNode;
+    }
+
+    // Check if a value is in the set
+    bool contains(int key) {
+        size_t index = hashFunction(key, size);
+        Node* current = table[index];
+        while (current != nullptr) {
+            if (current->value == key) {
+                return true;
+            }
+            current = current->next;
+        }
+        return false;
+    }
+
+    // Remove a value from the set
+    void remove(int key) {
+        size_t index = hashFunction(key, size);
+        Node* current = table[index];
+        Node* prev = nullptr;
+
+        while (current != nullptr) {
+            if (current->value == key) {
+                if (prev != nullptr) {
+                    prev->next = current->next;
+                } else {
+                    table[index] = current->next;
+                }
+                delete current;
+                return;
+            }
+            prev = current;
+            current = current->next;
+        }
+    }
+};
