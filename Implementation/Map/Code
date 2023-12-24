@@ -1,4 +1,3 @@
-# Map Header File
 class Map {
     static class Map* root;
    
