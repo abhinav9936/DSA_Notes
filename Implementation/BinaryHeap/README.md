@@ -26,4 +26,5 @@ Youtube Link - https://www.youtube.com/watch?v=HqPJF2L5h9U
 # Difference between heapify and naive insertion 
 * Heapify we do from the end of the array
 * The insertion logic starts from the start of the array
+* Heapify takes O(n) time to make the array max/min heap while insertion logic takes O(n log n) time
   
