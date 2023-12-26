@@ -1,0 +1,42 @@
+TC - O(N power M)
+#include <bits/stdc++.h>
+
+bool isSafe(int node, vector<vector<int>>& graph, vector<int>& colors, int c)
+{
+    for(int i = 0; i<graph.size(); i++)
+    {
+        if(node != i && graph[node][i])
+        {
+            if(colors[i] == c)
+                return false;
+        }
+    }
+    return true;
+}
+
+bool isPossible(int node, vector<vector<int>>& mat, vector<int>& colors, int m)
+{
+    if(node == mat.size())
+        return true;
+    
+    for(int i = 1; i <= m; i++)
+    {
+        if(isSafe(node, mat, colors, i))
+        {
+            colors[node] = i;
+            if(isPossible(node+1, mat, colors, m))
+                return true;
+            colors[node] = 0;
+        }
+    }
+    return false;
+}
+
+string graphColoring(vector<vector<int>> &mat, int m) {
+    // Write your code here
+    int n = mat.size();
+    vector<int> colors(n, 0);
+    if(isPossible(0, mat, colors, m))
+        return "YES";
+    return "NO";
+}
