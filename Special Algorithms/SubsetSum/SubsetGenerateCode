@@ -1,0 +1,28 @@
+class Solution {
+private:
+    void popsubsets(int i, vector<int>& nums, vector<int>& temp, vector<vector<int>>& ans)
+    {
+        if(i == nums.size())
+        {
+            ans.push_back(temp);
+            return;
+        }
+        //Not Pick Case
+        popsubsets(i+1, nums, temp, ans);
+
+        //Pick Case
+        temp.push_back(nums[i]);
+        popsubsets(i+1, nums, temp, ans);
+        temp.pop_back();
+    }
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>> ans;
+        vector<int> temp;
+        popsubsets(0, nums, temp, ans);
+        return ans;
+    }
+};
+
+
+For subset sum, instead of maintaining the array of numbers, we can maintain sums.
