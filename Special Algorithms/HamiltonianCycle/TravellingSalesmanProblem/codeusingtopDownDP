@@ -1,0 +1,28 @@
+#include <bits/stdc++.h> 
+int minHamCycle(int source, int visMask, vector<vector<int>> &distance, int allVis,vector<vector<int>>& dp)
+{
+	if(visMask == allVis)
+	{
+		return distance[source][0];
+	}
+	if(dp[source][visMask] != -1)
+		return dp[source][visMask];
+	int minDist = INT_MAX;
+	for(int i = 0; i<distance.size(); i++)
+	{
+		if((visMask & (1 << i)) == 0)
+		{
+			int d = distance[source][i] +  minHamCycle(i,(visMask | (1 << i)), distance, allVis, dp);
+			minDist = min(d, minDist);
+		}
+	}
+	return dp[source][visMask] = minDist;
+}
+int shortestRoute(vector<vector<int>> &distance)
+{
+	// Write your code here.
+	int n = distance.size();
+	int allvismask = (1<<n) - 1;
+	vector<vector<int>> dp(n, vector<int>(allvismask, -1));
+	return minHamCycle(0, 1, distance, allvismask, dp);
+}
