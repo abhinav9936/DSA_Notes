@@ -1,0 +1,33 @@
+#include <bits/stdc++.h> 
+int ks(int idx, int W, vector<int>& wt, vector<int>& val, vector<vector<int>>& dp)
+{
+	if(idx == 0)
+	{
+		if(wt[0]<=W) return val[0];
+		return 0;
+	}
+	if(dp[idx][W] != -1) return dp[idx][W];
+	int notPick = ks(idx-1, W, wt, val, dp);
+	int pick = 0;
+	if(wt[idx]<=W)
+		pick = val[idx] + ks(idx-1, W-wt[idx], wt, val, dp);
+	return dp[idx][W] = max(pick, notPick);
+}
+int knapsack(vector<int> wt, vector<int> val, int n, int maxWeight) 
+{
+	// Write your code here
+	vector<vector<int>> dp(n, vector<int>(maxWeight + 1, 0));
+	for(int j = wt[0]; j<=maxWeight; j++) dp[0][j] = val[0];
+	for(int i = 1; i<n; i++)
+	{
+		for(int W = 0; W <= maxWeight; W++)
+		{
+			int notPick = dp[i-1][W];
+			int pick = 0;
+			if(wt[i]<=W)
+				pick = val[i] + dp[i-1][W-wt[i]];
+			dp[i][W] = max(pick, notPick);
+		}
+	}
+	return dp[n-1][maxWeight];
+}
