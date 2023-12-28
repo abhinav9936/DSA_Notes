@@ -1,0 +1,58 @@
+Given an array and a number x
+Find max xor of x with numbers present in array
+
+struct Node
+{
+    Node* child[2];
+
+    Node()
+    {
+        child [0] = child[1] = NULL;
+    }
+};
+
+class Trie
+{
+private:
+    Node* root;
+public:
+
+    Trie()
+    {
+        root = new Node();
+    }
+
+    void insert(int num)
+    {
+        Node* curr = root;
+        for(int i = 31; i>=0; i--)
+        {
+            int bit = (num>>i) & 1;
+            if(curr->child[bit] == NULL)
+            {
+                Node* newNode = new Node();
+                curr->child[bit] = newNode;
+            }
+            curr = curr->child[bit];
+        }
+    }
+    int getMaxXor(int m)
+    {
+        Node* curr = root;
+        int ans = 0;
+        for(int i = 31; i >= 0; i--)
+        {
+            int mbit = (m >> i) & 1;
+            if(curr->child[1 - mbit] != NULL)
+            {
+                ans = ans | (1 << i);
+                curr = curr->child[1-mbit];
+            }
+            else
+            {
+                curr = curr->child[mbit];
+            }
+        }
+        return ans;
+    }
+};
