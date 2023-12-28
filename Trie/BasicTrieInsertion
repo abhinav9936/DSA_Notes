@@ -1,0 +1,81 @@
+#include <bits/stdc++.h> 
+const int MAXCHAR = 26;
+struct Node
+{
+    Node* child[MAXCHAR];
+    int wordCount;
+    //bool isDel;
+    int count;
+
+    Node()
+    {
+        for(int i = 0; i<MAXCHAR; i++)
+            child[i] = NULL;
+        wordCount = 0;
+        count = 0;
+        //isDel = false;
+    }
+
+};
+class Trie{
+public:
+    Node* root;
+    Trie() {
+        root = new Node();
+    }
+
+    void insert(string word) {
+        Node* curr = root;
+        for(int i = 0; i<word.size(); i++)
+        {
+            char ch = word[i];
+            if(curr->child[ch - 'a'] == NULL)
+            {
+                Node* newNode = new Node();
+                curr->child[ch - 'a'] = newNode;
+            }
+            //curr->isDel = false;
+            curr = curr->child[ch - 'a'];
+            curr->count++;
+        }
+        curr->wordCount++;
+    }
+
+    int countWordsEqualTo(string &word){
+        // Write your code here.
+        Node* curr = root;
+        for(int i = 0; i<word.size(); i++)
+        {
+            char ch = word[i];
+            if(curr->child[ch - 'a'] == NULL)
+                return false;
+            curr = curr->child[ch - 'a'];
+        }
+        return curr->wordCount;
+    }
+
+    int countWordsStartingWith(string &word){
+        // Write your code here.
+         Node* curr = root;
+        for(int i = 0; i<word.size(); i++)
+        {
+            char ch = word[i];
+            if(curr->child[ch - 'a'] == NULL)
+                return false;
+            curr = curr->child[ch - 'a'];
+        }
+        return curr->count;
+    }
+
+    void erase(string &word) {
+        // Write your code here.
+        Node *curr = root;
+        for (int i = 0; i < word.size(); i++)
+        {
+            int ch = word[i] - 'a';
+            curr = curr->child[ch];
+            curr->count--;
+        }
+        curr->wordCount--;
+    }
+};
