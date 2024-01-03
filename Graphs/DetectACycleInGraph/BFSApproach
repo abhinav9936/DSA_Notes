@@ -1,4 +1,4 @@
-
+**Can be used for undirected graph**
 In bfs approach, we have to maintain the parent of the node from where it is coming and if it is already visited and it is not the parent of the node, then that means
 there is a different path from where we can reach that node.
 
