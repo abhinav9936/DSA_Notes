@@ -1,1 +1,46 @@
 
+In bfs approach, we have to maintain the parent of the node from where it is coming and if it is already visited and it is not the parent of the node, then that means
+there is a different path from where we can reach that node.
+
+bool bfs(int src, vector<int> adj[], int *vis)
+    {
+        queue<pair<int, int>> q;
+        vis[src] = 1;
+        q.push({src, -1});
+        
+        while(!q.empty())
+        {
+            int node = q.front().first;
+            int parent = q.front().second;
+            q.pop();
+            
+            for(auto neigh: adj[node])
+            {
+                if(!vis[neigh])
+                {
+                    vis[neigh] = 1;
+                    q.push({neigh, node});
+                }
+                else if(parent != neigh)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+  public:
+    // Function to detect cycle in an undirected graph.
+    bool isCycle(int V, vector<int> adj[]) {
+        // Code here
+        int vis[V] = {0};
+        for(int i =0; i<V; i++)
+        {
+            if(!vis[i])
+            {
+                if(bfs(i, adj, vis) == true)
+                    return true;
+            }
+        }
+        return false;
+    }
