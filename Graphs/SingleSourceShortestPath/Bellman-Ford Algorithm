@@ -1,5 +1,6 @@
 Single Source Algorithm
 It solves the Dijkstra limitation of negative edges and also it helps in checking negative cycles.
+* Relax all the edges V - 1 times sequentiallly.
 Main intution behind this algorithm - 
 
 1) Initialized a distance array with infinite values except source
