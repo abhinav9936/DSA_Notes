@@ -1,0 +1,29 @@
+Returns a list of vectors of hash list
+
+vector<long long> rollingHash(string s, int windowSize, int base = 26, long long mod = 1e11+7)
+    {
+        int n = s.size();
+        vector<long long> power(windowSize+1, 1);
+        vector<long long> hash_values(n - windowSize + 1);
+
+        for(int i = 1; i<=windowSize; i++)
+            power[i] = (power[i-1] * base) % mod;
+
+        long long current_hash = 0;
+        for(int i = 0; i<windowSize; i++)
+        {
+            current_hash = (current_hash * base + (s[i] - 'a' + 1) )% mod;
+        }
+        hash_values[0] = current_hash;
+
+        for(int i = 1; i <= n - windowSize; i++)
+        {
+            current_hash = (current_hash - (s[i-1] - 'a' + 1) * power[windowSize-1] + mod) % mod;
+
+            current_hash = (current_hash * base + (s[i + windowSize - 1] - 'a' + 1)) % mod;
+
+            hash_values[i] = current_hash;
+        }
+        print(hash_values);
+        return hash_values;
+    }
