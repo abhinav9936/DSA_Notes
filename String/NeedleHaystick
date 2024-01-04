@@ -1,0 +1,55 @@
+Using the concept of LPS
+
+class Solution {
+private:
+    void lpsFind(string s, vector<int>& lps)
+    {
+        int prefix = 0;
+        int suffix = 1;
+        int n = s.size();
+        while(suffix < n)
+        {
+            if(s[prefix] == s[suffix])
+            {
+                lps[suffix] = prefix + 1;
+                suffix++;
+                prefix++;
+            }
+            else
+            {
+                if(prefix == 0)
+                    suffix++;
+                else
+                    prefix = lps[prefix-1];
+            }
+        }
+    }
+public:
+    int strStr(string haystick, string needle) {
+        int n = haystick.size();
+        int m = needle.size();
+        vector<int> lps(m, 0);
+        lpsFind(needle, lps);
+        vector<int> ans;
+        int first = 0;
+        int second = 0;
+        
+        while(first < n && second < m)
+        {
+            if(needle[second] == haystick[first])
+            {
+                first++;
+                second++;
+            }
+            else
+            {
+                if(second == 0)
+                    first++;
+                else
+                    second = lps[second - 1];
+            }
+        }
+        if(second == m) return first - second;
+        return -1;
+    }
+};
