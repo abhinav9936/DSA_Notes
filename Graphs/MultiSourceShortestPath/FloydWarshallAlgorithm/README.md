@@ -9,7 +9,7 @@ Then go from 0 to 2 and then from 2 to 1
 Then go from 0 to 3 and then from 3 to 1 and so on
 
 
-public:
+
 	void shortest_distance(vector<vector<int>>&matrix){
 	    // Code here
 	    int n = matrix.size();
