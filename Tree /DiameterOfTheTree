@@ -1,0 +1,34 @@
+Approach
+1) DFS on any node to find the leaf node
+2) DFS from leaf node to reach the farthest node
+
+
+How to Use?
+Input: adj1 -> Adjacency List
+Output: solve = diameter of the binary tree
+        farthestNode = lead node of the tree
+int farN1 = 0;
+solve(adj1, 0, farN1);
+int d1 = solve(adj1, farN1, farN1);
+
+
+void dfs(vector<vector<int>>& adj, int node, int distance, int& farthestNode, vector<int>& dist)
+{
+    dist[node] = distance;
+    if(dist[farthestNode] < distance)
+        farthestNode = node;
+    
+    for(auto neigh: adj[node])
+    {
+        if(dist[neigh] == -1)
+            dfs(adj, neigh, distance + 1, farthestNode, dist);
+    }
+}
+int solve(vector<vector<int>>& adj, int st, int& farthestNode)
+{
+    int n = adj.size();
+    vector<int> dist(n, -1);
+    farthestNode = st;
+    dfs(adj, st, 0, farthestNode, dist);
+    return dist[farthestNode];
+}
