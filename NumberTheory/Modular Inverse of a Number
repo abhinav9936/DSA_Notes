@@ -1,0 +1,25 @@
+const long long mod=1000000007;
+ll int modExp(ll int x, ll int y, ll int p)
+{
+	ll int res=1;
+ 
+	x=x%p;
+ 
+	while(y)
+	{
+		if(y & 1)
+		{
+			res=(res*x)%p;
+		}
+ 
+		y=y>>1;
+		x=(x*x)%p;
+	}
+ 
+	return res;
+}
+ 
+ll int modInverse(ll int n, ll int p) 
+{ 
+    return modExp(n, p-2, p); 
+}
