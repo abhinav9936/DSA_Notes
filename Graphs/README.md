@@ -25,8 +25,8 @@ Arguments:
 
 Example:
 
-```bash
 ./validate-isa-xml.py --xml_file /path/to/xml --exclusion_file /path/to/exclusion.xml --working_dir /path/to/working_dir --no_color
+```
 
 ## Output
 
